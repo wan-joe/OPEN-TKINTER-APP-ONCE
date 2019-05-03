@@ -3,8 +3,6 @@ import tkinter as tk
 
 
 
-
-
 PROCNAME = "myapp.exe"
 
 for proc in psutil.process_iter():
@@ -15,8 +13,7 @@ for proc in psutil.process_iter():
 
 else:
     print("not running, continue to startup.")
-    root.mainloop()
-
+    
 
 
 root = tk.Tk()
