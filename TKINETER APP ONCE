@@ -4,16 +4,6 @@ import tkinter as tk
 
 
 
-root = tk.Tk()
-
-root.geometry("400x400")
-
-
-
-b = tk.Button(root, text="hello world button", command=None)
-b.place(x=200, y=100)
-
-
 
 PROCNAME = "myapp.exe"
 
@@ -26,6 +16,16 @@ for proc in psutil.process_iter():
 else:
     print("not running, continue to startup.")
     root.mainloop()
+
+
+
+root = tk.Tk()
+
+root.geometry("400x400")
+
+
+b = tk.Button(root, text="hello world button", command=None)
+b.place(x=200, y=100)
 
 
 
