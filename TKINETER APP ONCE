@@ -1,5 +1,4 @@
 import psutil
-import tkinter as tk
 
 
 
@@ -15,6 +14,8 @@ else:
     print("not running, continue to startup.")
     
 
+
+import tkinter as tk
 
 root = tk.Tk()
 
