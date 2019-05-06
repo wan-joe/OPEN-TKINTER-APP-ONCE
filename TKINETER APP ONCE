@@ -1,7 +1,6 @@
 import psutil
 
 
-
 PROCNAME = "myapp.exe"
 
 for proc in psutil.process_iter():
