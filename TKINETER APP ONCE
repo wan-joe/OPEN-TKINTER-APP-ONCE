@@ -1,29 +1,29 @@
-import psutil
-
-
-PROCNAME = "myapp.exe"
-
-for proc in psutil.process_iter():
-        # check whether the process name matches
-    if proc.name() == PROCNAME:
-            print("Running, exit(1).")
-            exit(1)
-
-else:
-    print("not running, continue to startup.")
+def start_app():
+    import tkinter as tk
     
+    root = tk.Tk()
+    root.geometry("400x400")
+    
+    b = tk.Button(root, text="hello world button", command=None)
+    b.place(x=200, y=100)
+    
+    root.mainloop()
 
 
-import tkinter as tk
+if __name__ == '__main__':
+    import psutil, os
+    
+    PROCNAME = __file__
+    PID = os.getpid()
+    
+    print('PROCNAME:{} PID:{}'.format(PROCNAME, PID))
+    
+    for proc in psutil.process_iter(attrs=['pid', 'name', 'cmdline']):
+        info = proc.info
+        # print('info:{}'.format(info))
+        
+        if PROCNAME in info['cmdline'] and PID != info['pid']:
+            print('EXIT:{}'.format(proc.info))
+            exit(0)
 
-root = tk.Tk()
-
-root.geometry("400x400")
-
-
-b = tk.Button(root, text="hello world button", command=None)
-b.place(x=200, y=100)
-
-
-
-root.mainloop()
+    start_app()
