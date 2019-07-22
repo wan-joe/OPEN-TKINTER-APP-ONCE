@@ -22,7 +22,7 @@ if __name__ == '__main__':
         info = proc.info
         # print('info:{}'.format(info))
         
-        if PROCNAME in info['cmdline'] and PID != info['pid']:
+        if info and PROCNAME in info['cmdline'] and PID != info['pid']:
             print('EXIT:{}'.format(proc.info))
             exit(0)
 
