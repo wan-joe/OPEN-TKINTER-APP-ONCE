@@ -19,11 +19,11 @@ if __name__ == '__main__':
     print('PROCNAME:{} PID:{}'.format(PROCNAME, PID))
     
     for proc in psutil.process_iter(attrs=['pid', 'name', 'cmdline']):
-        info = proc.info
-        # print('info:{}'.format(info))
+        if info['cmdline']:
+            print('info:{}'.format(info))
         
-        if info and PROCNAME in info['cmdline'] and PID != info['pid']:
-            print('EXIT:{}'.format(proc.info))
-            exit(0)
+            if PROCNAME in info['cmdline'] and PID != info['pid']:
+                print('EXIT:{}'.format(proc.info))
+                exit(0)
 
     start_app()
