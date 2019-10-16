@@ -17,16 +17,22 @@ if __name__ == '__main__':
     # NOTE: Case sensitiv!
     PROCNAME = 'myapp.exe'
     PID = os.getpid()
-    
+    print("procname result below:")
     print('PROCNAME:{} PID:{}'.format(PROCNAME, PID))
-    
+
+
     for proc in psutil.process_iter(attrs=['pid', 'name', 'cmdline']):
         info = proc.info
-        if info['cmdline']:
-            print('info:{}'.format(info))
-        
-            if PROCNAME == info['name'] and PID != info['pid']:
-                print('EXIT:{}'.format(proc.info))
-                exit(0)
+        if PROCNAME == info['name']:
+            print("info, parent and ppid result below:")
+            print('info:{}, parent:{}, ppid:{}'.format(info, proc.parent(), proc.ppid()))
+
+
+            if info['cmdline']:
+                if PROCNAME == info['name']:
+                    print("info below result below:")
+                    print('info:{}'.format(info))
+                    exit(0)
+                
 
     start_app()
