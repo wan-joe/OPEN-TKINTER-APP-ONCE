@@ -17,9 +17,10 @@ if __name__ == '__main__':
     # NOTE: Case sensitiv!
     PROCNAME = 'myapp.exe'
     PID = os.getpid()
-    
+    print("procname result below:")
     print('PROCNAME:{} PID:{}'.format(PROCNAME, PID))
-    
+
+
     for proc in psutil.process_iter(attrs=['pid', 'name', 'cmdline']):
         info = proc.info
         if PROCNAME == info['name']:
