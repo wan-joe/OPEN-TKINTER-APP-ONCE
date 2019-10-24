@@ -17,20 +17,22 @@ if __name__ == '__main__':
     # NOTE: Case sensitiv!
     PROCNAME = 'myapp.exe'
     PID = os.getpid()
-    print("procname result below:")
     print('PROCNAME:{} PID:{}'.format(PROCNAME, PID))
 
+    child = set()
+    parent = set()
+    for proc in psutil.process_iter():
+        name = proc.parent()['name']
+        # print('parent[name]:{}'.format(name))
+        if PROCNAME == name:
+            child.add(proc.pid)
+        else:
+            parent.add(proc.pid)
 
-    for proc in psutil.process_iter(attrs=['pid', 'name', 'cmdline']):
-        info = proc.info
-        if PROCNAME == info['name']:
-            print('info:{}, parent:{}, ppid:{}'.format(info, proc.parent(), proc.ppid()))
-        
-            """
-            Disabled, to allow Second run and show **ALL**
-            if PROCNAME == info['name'] and PID != info['pid']:
-                print('EXIT:{}'.format(proc.info))
-                sys.exit(0)
-            """
+    exit_running = child - set((PID,))
+    # print('child:{}, parent={}, running:{}'.format(child, parent, running))
+    if exit_running:
+        print('EXIT: running:{}'.format(running))
+        sys.exit(0)
 
     start_app()
