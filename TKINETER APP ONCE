@@ -22,8 +22,15 @@ if __name__ == '__main__':
     child = set()
     parent = set()
     for proc in psutil.process_iter():
-        name = proc.parent()['name']
+        # If no parent PID is known return None
+        parent = proc.parent()
+        if parent is None:
+            name = 'unknown'
+        else:
+            name = parent['name']
+            
         # print('parent[name]:{}'.format(name))
+        
         if PROCNAME == name:
             child.add(proc.pid)
         else:
