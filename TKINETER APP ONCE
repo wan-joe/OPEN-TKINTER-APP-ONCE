@@ -24,12 +24,14 @@ if __name__ == '__main__':
     for proc in psutil.process_iter():
         # If no parent PID is known return None
         _parent = proc.parent()
+        print('_parent:{} {}'.format(type(_parent), _parent))
+        
         if _parent is None:
             name = 'unknown'
         else:
             name = _parent['name']
             
-        # print('_parent[name]:{}'.format(name))
+        print('_parent[name]:{}'.format(name))
         
         if PROCNAME == name:
             child.add(proc.pid)
@@ -37,7 +39,7 @@ if __name__ == '__main__':
             parent.add(proc.pid)
 
     exit_running = child - set((PID,))
-    # print('child:{}, parent={}, running:{}'.format(child, parent, running))
+    print('child:{}, parent={}, running:{}'.format(child, parent, exit_running))
     if exit_running:
         print('EXIT: running:{}'.format(running))
         sys.exit(0)
