@@ -41,7 +41,8 @@ if __name__ == '__main__':
     exit_running = child - set((PID,))
     print('child:{}, parent={}, running:{}'.format(child, parent, exit_running))
     if exit_running:
-        print('EXIT: running:{}'.format(running))
+      #  print('EXIT: running:{}'.format(running))
+        print('EXIT: running:{}'.format(exit_running))
         sys.exit(0)
 
     start_app()
